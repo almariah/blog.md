@@ -1,0 +1,43 @@
+.tags-list {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 3.4rem;
+  }
+  
+  .bg-tags {
+    background-color: #00000008;
+    font-size: 18px;
+    border-radius: 22px;
+    font-weight: 400;
+    //color: #555;
+    color: #aaa;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    //border: 1px solid #0000002d;
+    border:none;
+  }
+
+  .bg-tags[dir=ltr] {
+    margin-right: 5px;
+  }
+
+  .bg-tags[dir=rtl] {
+    margin-left: 5px;
+  }
+  
+  .bg-selected {
+    color: #c7254e;
+    background-color: #f9f2f4;
+  }
+  
+  .bg-tags:hover {
+    color: #c7254e;
+    background-color: #f9f2f4;
+  }
+  
+
+  .tags h1 {
+    font-size: 1.8em;
+    margin: 0.67em 0;
+    padding-bottom: 0.3em;
+  }

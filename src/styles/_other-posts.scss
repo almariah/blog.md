@@ -1,0 +1,22 @@
+.other-posts {
+	font-size: 1rem;
+	padding-top: 3rem;
+	padding-left: 20px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+}
+
+.other-posts a {
+    color: #555;
+	text-decoration: none;
+}
+
+
+
+.other-posts .list-group-item:hover,
+.other-posts .list-group-item:focus {
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-color: #ddd;
+    text-decoration: none;
+}

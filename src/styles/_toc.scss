@@ -1,0 +1,93 @@
+.sidebar-content {
+	height: 100vh;
+	padding-bottom: 3rem;
+	//margin-bottom: 3rem;
+	font-size: 1rem;
+	padding-top: 0rem;
+}
+
+.toc a:hover,
+.toc a:focus {
+    color: #c7254e;
+    border-color: #ddd;
+    text-decoration: underline;
+}
+
+.toc a {
+    color: #333;
+}
+
+.toc {
+    color: #333;
+	//font-family: "PT Serif", serif;
+	margin-left: 0px;
+	width: 100%;
+}
+
+.toc .is-active {
+    font-weight: 600;
+}
+
+.toc {
+	overflow-y: scroll;
+	max-height: 95vh;
+}
+
+.test1 {
+	border-bottom: 1px solid #eaecef;
+    padding: 0px 0px 0px 0px;
+	//margin-left: 20px;
+	padding-left: 22px;
+	padding-right: 22px;
+	display: flex;
+}
+
+.test2 {
+    padding: 12px 0px 0px 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#x[dir=ltr] {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+	font-size: large;
+}
+
+#x[dir=rtl] {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+	font-size: large;
+}
+
+.test {
+	position: sticky;
+	top: 36px;
+  }
+
+.test[dir=ltr] {
+	padding: 0rem 1.4rem 0rem 0rem;
+}
+
+.test[dir=rtl] {
+	padding: 0rem 0rem 0rem 1.4rem;
+}
+  
+  .test-a {
+	z-index: 100;  
+  }
+
+.toc code {
+    color: var(--bs-code-color) !important;
+}
+
+.toc-title {
+	padding-right: 6px;
+	padding-left: 6px;
+}
+
+
+//// buttooooon whn scaled
+/// /// scroll bar hide

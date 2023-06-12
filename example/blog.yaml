@@ -1,0 +1,15 @@
+title: Blog.md
+subtitle: Write Your Blog in Markdown 
+author: Abdullah Almariah
+author_image: /posts/media/author.jpg
+author_link: /posts/about
+lang: en
+copyright: |
+  Copyright © 2008-2023 Abdullah Almariah
+nav:
+  - title: Archives
+    link: /posts/archives
+  - title: About
+    link: /posts/about
+  - title: العربية
+    link: /posts/arabic
