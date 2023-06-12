@@ -19,7 +19,7 @@ export const fetchPosts = async (tags, current, limit) => {
             }
         }
         if (current !== undefined) {
-            if (item.link.replace(/\.md$/, "") === current) {
+            if (encodeURI(item.link.replace(/\.md$/, "")) === current) {
                 return false;
             }
         }
