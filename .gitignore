@@ -25,3 +25,8 @@ yarn-error.log*
 blog-md-linux-amd64
 blog-md-darwin-amd64
 blog-md-darwin-arm64
+
+# dev
+public/posts
+public/blog.yaml
+public/posts.yaml
