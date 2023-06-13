@@ -17,8 +17,6 @@ other_posts:
 - english
 
 toc_heading: On this page
-
-skip_first_heading: true
 ---
 
 # Blog Title (will be skipped)

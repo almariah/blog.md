@@ -99,9 +99,6 @@ const Content = () => {
         
         let trimmed = data.replace(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/g, "");
         trimmed = trimmed.replace(/^[\r?\n]+/g, "")
-        if (yamlObject.skip_first_heading == true) {
-          trimmed = trimmed.replace(/^#+\s([\s\S]*?)\r?\n/g, "");
-        }
         setPostcontent(trimmed)
       });
   }
