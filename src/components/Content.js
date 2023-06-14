@@ -152,6 +152,10 @@ const Content = () => {
       </header>
   }
 
+  let postSummary
+  if (postFrontmatter.summary) {
+    postSummary = <Markdown>{postFrontmatter.summary}</Markdown>
+  }
 
   let tagsElement;
   if (postFrontmatter.posts) {
@@ -176,6 +180,20 @@ const Content = () => {
     otherPostsElement = <OtherPosts posts={otherPosts} heading={postFrontmatter.other_posts_heading}/>
   }
 
+  let contentElement = <Markdown
+    options={{
+      enforceAtxHeadings: true,
+      slugify: slugifyID,
+      overrides: {
+        pre: PreBlock,
+        blockquote: Blockquote,
+        a: MDLink,
+      }
+    }}
+  >
+    {postContent}
+  </Markdown>
+
   let postsElement;
   if (postFrontmatter.posts) {
     postsElement = <Posts 
@@ -199,22 +217,16 @@ const Content = () => {
   return (
     <div className="article-wrapper">
       <div className="sticky">
-
         <nav className="navbar navbar-expand-lg navbar-light bg-light" id="nav-topNav">
-          
           { 
             <button type="button" className="ml-auto btn-menu rounded-0 navbar-toggler" onClick={useFullScreen}
             style={{visibility: postFrontmatter.toc_heading ? 'visible' : 'hidden' }}>
               <small className="navbar-toggler-icon"></small>
             </button>
           }
-          
-          
-
           <button type="button" className="mr-auto btn-nav rounded-0 navbar-toggler" data-bs-toggle="collapse" data-bs-target="#div-collapsibleNav" aria-expanded="false">
             <span className="navbar-toggler-icon "></span>
           </button>
-    
           <div className="navbar-collapse collapse" id="div-collapsibleNav">
             <ul className="navbar-nav navbar-menu">
               <hr className="hr-padding"></hr>
@@ -230,24 +242,17 @@ const Content = () => {
               })}
             </ul>
           </div>
-                  
         </nav>
-
       </div>
-
       <article>
-
         <header>
         </header>
-
-
         <div dir={postFrontmatter.dir} className="container-fluid">
           <div className="row justify-content-center">
             <div className="test3 col d-flex flex-column justify-content-between">
               {tagsElement}
               {toc}
             </div>
-
             <div id="blog-content" className="blog-content col-lg-8 col-xl-7">
               <div className="content-section markdown-body">
                 {header}
@@ -258,38 +263,23 @@ const Content = () => {
                     );
                   })}
                 </div>*/}
-                  <Markdown
-                    options={{
-                      enforceAtxHeadings: true,
-                      slugify: slugifyID,
-                      overrides: {
-                        pre: PreBlock,
-                        blockquote: Blockquote,
-                        a: MDLink,
-                      }
-                    }}
-                  >
-                    {postContent}
-                  </Markdown>
+                {postSummary}
+                {contentElement}
               </div>
               {postsElement}
             </div>
-
             <div className="col-sm-8 col-md-8 col-lg-8 col-xl-2">
               {otherPostsElement}
               <Author />
             </div>
           </div>
-
           <div className="row justify-content-center">
             <hr></hr>
             <div className="col-sm-9 col-md-8 col-lg-7 col-xl-5">
               {disqus}
             </div>
           </div>
-
         </div>
-
       </article>
     </div>
   )

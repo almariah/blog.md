@@ -3,7 +3,7 @@ import '../styles/_footer.scss'
 import { BlogConfig } from '../App';
 import React from 'react';
 
-const Footer = ({copyright}) => {
+const Footer = () => {
   const config = React.useContext(BlogConfig);
   return (
     <footer className='footer'>

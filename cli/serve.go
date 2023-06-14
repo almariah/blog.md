@@ -36,8 +36,9 @@ func spaFileServeFunc() func(http.ResponseWriter, *http.Request) {
 		if wt.statusCode == http.StatusNotFound {
 			r.URL.Path = "/"
 			w.Header().Set("Content-Type", "text/html")
-			w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate;")
-			w.Header().Set("pragma", "no-cache")
+			w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
+			w.Header().Set("Pragma", "no-cache")
+			w.Header().Set("Expires", "0")
 			fileServer.ServeHTTP(w, r)
 		}
 	}
