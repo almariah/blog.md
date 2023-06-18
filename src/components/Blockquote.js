@@ -1,6 +1,8 @@
 import '../styles/_admonition.scss'
 import '../styles/_alerts.scss'
 
+import { useState, useEffect } from "react"
+
 const alertTypes = {
   alert_: 'Alert',   
   warning_: 'Warning',
@@ -9,42 +11,57 @@ const alertTypes = {
   note_: 'Note',
 }
 
-const Blockquote = ({className, children}) => {
-  
-  //if (className && className.startsWith('lang-')) {
-    //lang = className.replace('lang-', '');
-  //}
+const regexConst = /^\[!([a-zA-Z]+_?)\]/
 
-  const start = children[0]
-  const start1 = start.props.children[0]
+let tag = ""
+let title = ""
+let matched;
 
-  let tag = ""
-  let title = ""
+const iter = (child) => {
 
-  let trimmed = null
-
-  /// fix lne break S       S
-
-  if (start1 != null) {
-    let regexConst = /^\[!([a-zA-Z]+_?)\]/
-    const match = start1.match(regexConst);
-    if (match != null) {
-      tag = match[1].toLowerCase()
-      const tag_len = match[0].length
-      const first_line = start1.split('\n')[0]
-      title = first_line.slice(tag_len).trim()
-      if (title == "") {
-        title = tag.charAt(0).toUpperCase() + tag.slice(1);
-      }
-      trimmed = start1.slice(first_line.length).trim()
-    }
-
+  let iterList = []
+  if (!Array.isArray(child)) {
+    return iterList
   }
+
+  child.forEach(function (item, index) {
+    if (matched == true) {
+      iterList.push(item)
+      return iterList
+    }
+    
+    if (item.props != null) {
+      iterList.push(iter(item.props.children))
+    } else {
+      const match = item.match(regexConst);
+      if (match != null) {
+        matched = true
+        tag = match[1].toLowerCase()
+        const tag_len = match[0].length
+        const first_line = item.split('\n')[0]
+        title = first_line.slice(tag_len).trim()
+        if (title == "") {
+          title = tag.charAt(0).toUpperCase() + tag.slice(1)
+        }
+        let trimmed = item.slice(first_line.length).trim()
+        item = trimmed + '\n'
+      }
+      iterList.push(item)
+    }
+  });
+
+  return iterList
+}
+
+const Blockquote = ({className, children}) => {
+
+  let blockquoteContent = iter(children)
+  matched = false
 
   if (tag == "" || title == "") {
     return (
       <blockquote>
-        {children}
+        {blockquoteContent}
       </blockquote>
     );
   }
@@ -52,15 +69,15 @@ const Blockquote = ({className, children}) => {
   if (tag.endsWith("_")) {
     return (
       <div className={alertTypes[tag]}>
-        {children}
+        {blockquoteContent}
       </div>
     );
   }
 
   return (
     <div className={`admonition ${tag}`}>
-      <p className="admonition-title">{title}</p>
-      {children}
+      <div className="admonition-title">{title}</div>
+        <p>{blockquoteContent}</p>
     </div>
   );
 }
