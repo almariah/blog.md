@@ -13,50 +13,49 @@ const alertTypes = {
 
 const regexConst = /^\[!([a-zA-Z]+_?)\]/
 
-let tag = ""
-let title = ""
-let matched;
+const Blockquote = ({className, children}) => {
 
-const iter = (child) => {
+  let tag = ""
+  let title = ""
+  let matched;
 
-  let iterList = []
-  if (!Array.isArray(child)) {
+  const iter = (child) => {
+
+    let iterList = []
+    if (!Array.isArray(child)) {
+      return iterList
+    }
+
+    child.forEach(function (item, index) {
+      if (matched == true) {
+        iterList.push(item)
+        return iterList
+      }
+
+      if (item.props != null) {
+        iterList.push(iter(item.props.children))
+      } else {
+        const match = item.match(regexConst);
+        if (match != null) {
+          matched = true
+          tag = match[1].toLowerCase()
+          const tag_len = match[0].length
+          const first_line = item.split('\n')[0]
+          title = first_line.slice(tag_len).trim()
+          if (title == "") {
+            title = tag.charAt(0).toUpperCase() + tag.slice(1)
+          }
+          let trimmed = item.slice(first_line.length).trim()
+          item = trimmed + '\n'
+        }
+        iterList.push(item)
+      }
+    });
+
     return iterList
   }
 
-  child.forEach(function (item, index) {
-    if (matched == true) {
-      iterList.push(item)
-      return iterList
-    }
-    
-    if (item.props != null) {
-      iterList.push(iter(item.props.children))
-    } else {
-      const match = item.match(regexConst);
-      if (match != null) {
-        matched = true
-        tag = match[1].toLowerCase()
-        const tag_len = match[0].length
-        const first_line = item.split('\n')[0]
-        title = first_line.slice(tag_len).trim()
-        if (title == "") {
-          title = tag.charAt(0).toUpperCase() + tag.slice(1)
-        }
-        let trimmed = item.slice(first_line.length).trim()
-        item = trimmed + '\n'
-      }
-      iterList.push(item)
-    }
-  });
-
-  return iterList
-}
-
-const Blockquote = ({className, children}) => {
-
   let blockquoteContent = iter(children)
-  matched = false
 
   if (tag == "" || title == "") {
     return (
