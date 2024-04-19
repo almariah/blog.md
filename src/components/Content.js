@@ -87,8 +87,8 @@ const Content = () => {
         const matched  = data.match(regexConst);
         if (matched != null) {
           yamlObject = yaml.load(matched[1])
-          if (!yamlObject.dir || yamlObject.dir != "rtl") {
-            yamlObject.dir = "ltr"
+          if (!yamlObject.direction || yamlObject.direction != "rtl") {
+            yamlObject.direction = "ltr"
           }
           setPostFrontmatter(yamlObject)
 
@@ -144,7 +144,7 @@ const Content = () => {
       let date = new Date(postFrontmatter.date)
       dateStr= date.toLocaleString(postFrontmatter.locale, { month: 'short',  day:"numeric", year:"numeric"})
     }
-    header = <header dir={postFrontmatter.dir}>
+    header = <header dir={postFrontmatter.direction}>
       <h1 className="title"><Markdown>{postFrontmatter.title}</Markdown></h1>
       <p className="meta">
         <p>{dateStr}</p>
@@ -165,7 +165,7 @@ const Content = () => {
         selectedTags={selectedTags}
         handleTags={handleTags}
         heading={postFrontmatter.tags_heading||"Tags"}
-        dir={postFrontmatter.dir}
+        dir={postFrontmatter.direction}
       ></Tags>
     </div>
   }
@@ -202,7 +202,7 @@ const Content = () => {
       handleTags={handleTags}
       heading={postFrontmatter.posts_section_heading} 
       locale={postFrontmatter.locale}
-      dir={postFrontmatter.dir}
+      dir={postFrontmatter.direction}
     />
   }
 
@@ -247,7 +247,7 @@ const Content = () => {
       <article>
         <header>
         </header>
-        <div dir={postFrontmatter.dir} className="container-fluid">
+        <div dir={postFrontmatter.direction} className="container-fluid">
           <div className="row justify-content-center">
             <div className="test3 col d-flex flex-column justify-content-between">
               {tagsElement}
