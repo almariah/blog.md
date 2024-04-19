@@ -48,6 +48,9 @@ func update() error {
 	for _, f := range versionFile {
 		err := os.Remove(f)
 		if err != nil {
+			if os.IsNotExist(err) {
+				continue
+			}
 			return err
 		}
 	}
